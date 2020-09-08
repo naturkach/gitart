@@ -15,20 +15,38 @@ f    = open("pacman", "r")
 line = f.readlines()
 curr = line[dayn]
 #f.close()
-
-if "v" in curr:
+poz = 0 #deff value
+if   "v" in curr:
 	print("ok")
-	poz = curr.find("v")
-	print (poz)
+	poz = curr.find("v")	
+	print "poz:", poz
 	#git commit
+elif "n" in curr:
+	print("no")
+	poz = curr.find("n")
 
 #get nextday char:
-ndc = line[nexd][poz]
+next_day_char = line[nexd][poz]
 
-if (ndc == '.'):
-	nl = line[nexd].replace('.','n',1)
+if  (next_day_char == '.'):
+#	nl = line[nexd].replace('.','n',poz+1)
+	nextact = "n"
+elif(next_day_char == 'x'):
+	nextact = "v"
 
-print "nl=", nl
+#	
+newline_list  	  = list(line[nexd])
+newline_list[poz] = nextact
+newstr 		  = "".join(newline_list)
+#
+oldline_list	  = list(line[curr])
+oldline_list[poz] = oldchar
+oldstr		  = "".join(oldline_list)
 
-print "dayn", dayn, line[dayn]
-print "next", nexd, line[nexd], ndc, line[nexd][poz]
+print "today ", curr
+print "nextd ", newstr
+
+#change current
+
+#print "dayn", dayn, line[dayn]
+#print "next", nexd, line[nexd], ndc
