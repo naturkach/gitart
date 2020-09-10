@@ -4,47 +4,66 @@ import datetime
 
 #day of the week as an integer, where Monday is 0 and Sunday is 6.
 dayn = datetime.datetime.today().weekday()
+print "day:", dayn
 if (dayn < 6):
-	dayn = dayn +1
-	nexd = dayn +1
+	dayn = dayn +2
+#	nexd = dayn +2
 else: 
 	dayn = 0
-	nexd = 1
+#	nexd = 1
 
-f    = open("pacman", "r")
-line = f.readlines()
-curr = line[dayn]
-#f.close()
-poz = 0 #deff value
-if   "v" in curr:
-	print("ok")
-	poz = curr.find("v")	
-	print "poz:", poz
-	#git commit
-elif "n" in curr:
-	print("no")
-	poz = curr.find("n")
+#f    = open("pacman", "r")
+#line = f.readlines()
+#curr = line[dayn]
+
+with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
+	lines = f1.readlines()
+#	curr  = lines[dayn]
+	poz = 10 #deff value
+	strn= 0
+		
+	for line in lines:
+		strn = strn + 1 
+		line = line.strip()
+		#print (strn, line)
+		#curr = line[dayn]
+		#print ('curr', curr)	
+		if (dayn == strn):
+			print strn, line, "today"
+		else:
+			print strn, line
+'''	
+		if   "v" in curr:
+			print("ok")
+			poz 	= curr.find("v")	
+			print "poz:", poz
+			oldchar = "x"
+		elif "n" in curr:
+			print("no")
+			poz = curr.find("n")
+			oldchar = "."
 
 #get nextday char:
-next_day_char = line[nexd][poz]
-
-if  (next_day_char == '.'):
+		next_day_char = line[nexd][poz]
+		if  (next_day_char == '.'):
 #	nl = line[nexd].replace('.','n',poz+1)
-	nextact = "n"
-elif(next_day_char == 'x'):
-	nextact = "v"
-
+			nextact = "n"
+		elif(next_day_char == 'x'):
+			nextact = "v"
 #	
-newline_list  	  = list(line[nexd])
-newline_list[poz] = nextact
-newstr 		  = "".join(newline_list)
-#
-oldline_list	  = list(line[curr])
-oldline_list[poz] = oldchar
-oldstr		  = "".join(oldline_list)
+		newline_list  	  = list(line[nexd])
+		newline_list[poz] = nextact
+		newstr 		  = "".join(newline_list)
 
-print "today ", curr
-print "nextd ", newstr
+		oldline_list	  = list(line[dayn])
+		oldline_list[poz] = oldchar
+		oldstr		  = "".join(oldline_list)
+#curr[poz] = "z"
+		print "today ", curr
+		print "nextd ", newstr
+		print "old   ", oldstr
+		f2.write(oldstr)
+'''
 
 #change current
 
