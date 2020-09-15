@@ -26,19 +26,23 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
 		strn = strn + 1 
 		line = line.strip()
 		#print (strn, line)
-		#curr = line[dayn]
+		curr = line[dayn]
 		#print ('curr', curr)	
 		if (dayn == strn):
 			print strn, line, "today"
 		else:
 			print strn, line
-'''	
-		if   "v" in curr:
+
+#		f2.write(line)
+
+
+	
+		if   "v" in line:
 			print("ok")
 			poz 	= curr.find("v")	
 			print "poz:", poz
 			oldchar = "x"
-		elif "n" in curr:
+		elif "n" in line:
 			print("no")
 			poz = curr.find("n")
 			oldchar = "."
@@ -63,7 +67,7 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
 		print "nextd ", newstr
 		print "old   ", oldstr
 		f2.write(oldstr)
-'''
+
 
 #change current
 
