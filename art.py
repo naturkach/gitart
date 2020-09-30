@@ -4,15 +4,20 @@ import datetime
 import os
 
 #day of the week as an integer, where Monday is 0 and Sunday is 6.
+#bat:
+# 0123456 - py_day
+# 1234567 - normal_day (line_number)
+# 7123456 - git_day
+
 pyday = datetime.datetime.today().weekday()
 print "pyday:", pyday
 
-if (pyday <= 5):
-	daynow = pyday +2
-	nexday = daynow +1
+if (pyday < 6):
+	daynow = pyday + 1
+	nexday = daynow + 1
 else: 
-	daynow = 1
-	nexday = 2
+	daynow = pyday + 1
+	nexday = 1
 
 print "daynow:", daynow
 
@@ -25,20 +30,24 @@ if os.path.exists("pacman.tmp"):
 
 with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
 	lines = f1.readlines()
-	poz = 0 #deff value	
+	poz = 0 #deff value
+	linenumb = 0	
 
 	def domagic():
+	    print "--nxday--", lines[(nexday)]
+	    print "--nd2--", line
 	    next_day_char = line[nexday][poz]
+	   
 	    if  (next_day_char == '.'):
                 nextchar = "n"
             elif(next_day_char == 'x'):
 		nextchar = "v"
 	   	   
-	    newline_list  	  = list(lines[(nexday-1)])
-	    newline_list[poz]     = nextchar
+	    newline_list  	  = list(lines[(nexday)])
+	    newline_list[poz]     = nextchar	    
 	    newstr = "".join(newline_list)
 	    newstr = newstr.rstrip()	    	    
-#	    print (newstr)
+	    print (newstr)
 	    f2.write(newstr)
 	    f2.write("\n")
 
@@ -55,17 +64,20 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
 			f2.write(oldline)
 			f2.write("\n")					
            		domagic()
+			linenumb += 2			
 		elif "n" in line:
-#			print("no")
 			poz = line.find("n")
 			oldchar = "."
 			oldline = line.replace('n', '.')
-		elif (line == daynow + 1):
-			continue
+			linenumb += 2
+			print linenumb
+		elif ( linenumb == nexday ):
+		    linenumb += 1
 		else:
 		    print line
 	            f2.write(line)
 		    f2.write("\n")
+		    linenumb += 1
 		
 
 f1.close()
