@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
-from git import Repo
+#import subproces as cmd
 
 #day of the week as an integer, where Monday is 0 and Sunday is 6.
-#bat:
+#but:
 # 0123456 - py_day
 # 1234567 - normal_day (line_number)
 # 7123456 - git_day
@@ -31,15 +31,6 @@ commit = "no"
 PATH_OF_GIT_REPO = r'home/naturkach/gitart'  # make sure .git folder is properly configured
 COMMIT_MESSAGE = 'comment from python script'
 
-def git_push():
-    try:
-        repo = Repo(PATH_OF_GIT_REPO)
-        repo.git.add(update=True)
-        repo.index.commit(COMMIT_MESSAGE)
-        origin = repo.remote(name='origin')
-        origin.push()
-    except:
-        print('Some error occured while pushing the code') 
 
 
 with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
@@ -48,20 +39,27 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
     linenumb = 1	
 
     def domagic():
-        next_day_char = line[nexday][poz]
+#        print ("line:", lines[nexday][poz])
+#        print ("poz:", poz)
+
+        next_day_char = lines[nexday][poz]
 	   
         if  (next_day_char == '.'):
             nextchar = "n"
         elif(next_day_char == 'x'):
             nextchar = "v"
 
-    newline_list  	  = list(lines[(nexday)])
-    newline_list[poz]     = nextchar	    
-    newstr = "".join(newline_list)
-    newstr = newstr.rstrip()	    	    
-    print (linenumb, newstr)
-    f2.write(newstr)
-    f2.write("\n")
+        newline_list  	  = list(lines[(nexday)])
+        newline_list[poz]     = nextchar	    
+        newstr = "".join(newline_list)
+        newstr = newstr.rstrip()	    	    
+        print (linenumb, newstr)
+        f2.write(newstr)
+        f2.write("\n")
+        
+        os.chdir("/home/naturkach/gitart")
+        os.system("git add .")
+
 
     for line in lines:
         line = line.strip()
@@ -99,8 +97,4 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
 		
 
 f1.close()
-f2.close()
-
-if (commit == "yes"):
-    git_push()
-    
+f2.close()    
