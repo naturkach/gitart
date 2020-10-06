@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
-#import subproces as cmd
 
 #day of the week as an integer, where Monday is 0 and Sunday is 6.
 #but:
@@ -27,11 +26,6 @@ if os.path.exists("pacman.tmp"):
     os.remove("pacman.tmp")
 
 commit = "no"
-
-PATH_OF_GIT_REPO = r'home/naturkach/gitart'  # make sure .git folder is properly configured
-COMMIT_MESSAGE = 'comment from python script'
-
-
 
 with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
     lines = f1.readlines()
