@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
+<<<<<<< HEAD
 import subprocess as cmd
 
 #day of the week as an integer, where Monday is 0 and Sunday is 6.
@@ -11,6 +12,15 @@ import subprocess as cmd
 # 7123456 - git_day    sun-set
 
 
+=======
+#import subproces as cmd
+
+#day of the week as an integer, where Monday is 0 and Sunday is 6.
+#but:
+# 0123456 - py_day
+# 1234567 - normal_day (line_number)
+# 7123456 - git_day
+>>>>>>> tempbranch
 
 pyday = datetime.datetime.today().weekday()
 print ("pyday:", pyday)
@@ -30,6 +40,13 @@ if os.path.exists("pacman.tmp"):
 
 commit = "no"
 
+<<<<<<< HEAD
+=======
+PATH_OF_GIT_REPO = r'home/naturkach/gitart'  # make sure .git folder is properly configured
+COMMIT_MESSAGE = 'comment from python script'
+
+
+>>>>>>> tempbranch
 
 with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
     lines = f1.readlines()
@@ -37,9 +54,16 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
     linenumb = 1	
 
     def domagic():
+<<<<<<< HEAD
         print("poz",poz, "nd", nextday)
         next_day_char = line[nextday][poz]
         
+=======
+#        print ("line:", lines[nexday][poz])
+#        print ("poz:", poz)
+
+        next_day_char = lines[nexday][poz]
+>>>>>>> tempbranch
 	   
         if  (next_day_char == '.'):
             nextchar = "n"
@@ -53,6 +77,13 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
         print (linenumb, newstr)
         f2.write(newstr)
         f2.write("\n")
+<<<<<<< HEAD
+=======
+        
+        os.chdir("/home/naturkach/gitart")
+        os.system("git add .")
+
+>>>>>>> tempbranch
 
     for line in lines:
         line = line.strip()
@@ -91,9 +122,13 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
 		
 
 f1.close()
+<<<<<<< HEAD
 f2.close()
 
 if (commit == "yes"):
     print ("commiting")
     comm = cmd.run("/home/naturkach/gitart/git add .", check=True, shell=True)
     
+=======
+f2.close()    
+>>>>>>> tempbranch
