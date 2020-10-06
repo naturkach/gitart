@@ -2,44 +2,33 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
-from git import Repo
+import subprocess as cmd
 
 #day of the week as an integer, where Monday is 0 and Sunday is 6.
 #bat:
-# 0123456 - py_day
-# 1234567 - normal_day (line_number)
-# 7123456 - git_day
+# 0123456 - py_day     mon-sun
+# 1234567 - normal_day mon-sun(line_number)
+# 7123456 - git_day    sun-set
+
+
 
 pyday = datetime.datetime.today().weekday()
 print ("pyday:", pyday)
 
 if (pyday < 6):
 	daynow = pyday + 1
-	nexday = daynow + 1
+	nextday = daynow + 1
 else: 
 	daynow = pyday + 1
-	nexday = 1
+	nextday = 1
 
 print ("daynow:", daynow)
-print ("nexday:", nexday)
+print ("nexday:", nextday)
 
 if os.path.exists("pacman.tmp"):
     os.remove("pacman.tmp")
 
 commit = "no"
-
-PATH_OF_GIT_REPO = r'home/naturkach/gitart'  # make sure .git folder is properly configured
-COMMIT_MESSAGE = 'comment from python script'
-
-def git_push():
-    try:
-        repo = Repo(PATH_OF_GIT_REPO)
-        repo.git.add(update=True)
-        repo.index.commit(COMMIT_MESSAGE)
-        origin = repo.remote(name='origin')
-        origin.push()
-    except:
-        print('Some error occured while pushing the code') 
 
 
 with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
@@ -48,27 +37,30 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
     linenumb = 1	
 
     def domagic():
-        next_day_char = line[nexday][poz]
+        print("poz",poz, "nd", nextday)
+        next_day_char = line[nextday][poz]
+        
 	   
         if  (next_day_char == '.'):
             nextchar = "n"
         elif(next_day_char == 'x'):
             nextchar = "v"
 
-    newline_list  	  = list(lines[(nexday)])
-    newline_list[poz]     = nextchar	    
-    newstr = "".join(newline_list)
-    newstr = newstr.rstrip()	    	    
-    print (linenumb, newstr)
-    f2.write(newstr)
-    f2.write("\n")
+        newline_list  	  = list(lines[(nexday)])
+        newline_list[poz]     = nextchar	    
+        newstr = "".join(newline_list)
+        newstr = newstr.rstrip()	    	    
+        print (linenumb, newstr)
+        f2.write(newstr)
+        f2.write("\n")
 
     for line in lines:
         line = line.strip()
         curr = line[daynow]		
 
         if "v" in line and daynow !=7:
-            poz = line.find("v")				
+            poz = line.find("v")
+            #print ("pozition", poz)				
             oldchar = "x"		
             oldline = line.replace('v', 'x')
             print (linenumb, oldline)
@@ -87,7 +79,7 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
             linenumb += 2
 	    #rint linenumb
             commit = "no"
-        elif ( linenumb == nexday+1 ):
+        elif ( linenumb == nextday+1 ):
             linenumb += 1
 #	    print "lnub = nextd", linenumb, nexday
    		
@@ -102,5 +94,6 @@ f1.close()
 f2.close()
 
 if (commit == "yes"):
-    git_push()
+    print ("commiting")
+    comm = cmd.run("/home/naturkach/gitart/git add .", check=True, shell=True)
     
