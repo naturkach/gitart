@@ -53,6 +53,7 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
         
         os.chdir("/home/naturkach/gitart")
         os.system("git add .")
+        os.system("git commit -m \"auto commit\"")
 
 
     for line in lines:
