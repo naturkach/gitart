@@ -51,9 +51,10 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
         f2.write(newstr)
         f2.write("\n")
         
-        os.chdir("/home/naturkach/gitart")
-        os.system("git add .")
-        os.system("git commit -m \"auto commit\"")
+        
+#        os.chdir("/home/naturkach/gitart")
+#        os.system("git add .")
+#        os.system("git commit -m \"auto commit\"")
 
 
     for line in lines:
@@ -90,6 +91,11 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
             f2.write("\n")
             linenumb += 1
 		
+if ( commit == "yes" ):
+    os.chdir("/home/naturkach/gitart")
+    os.system("git add .")
+    os.system("git commit -m \"auto commit\"")
+
 
 f1.close()
 f2.close()    
