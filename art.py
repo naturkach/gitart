@@ -95,7 +95,7 @@ if ( commit == "yes" ):
     os.chdir("/home/naturkach/gitart")
     os.system("git add .")
     os.system("git commit -m \"auto commit\"")
-    os.system("mv /home/naturkach/gitart/pacman.tmp home/naturkach/gitart/pacman")
+    os.system("mv /home/naturkach/gitart/pacman.tmp /home/naturkach/gitart/pacman")
 
 
 f1.close()
