@@ -93,9 +93,9 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
 		
 if ( commit == "yes" ):
     os.chdir("/home/naturkach/gitart")
+    os.system("mv pacman.tmp pacman")
     os.system("git add .")
     os.system("git commit -m \"auto commit\"")
-    os.system("mv /home/naturkach/gitart/pacman.tmp /home/naturkach/gitart/pacman")
 
 
 f1.close()
