@@ -34,7 +34,6 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
 
     def domagic():
 #        print ("line:", lines[nexday][poz])
-#        print ("poz:", poz)
 
         next_day_char = lines[nexday][poz]
 	   
@@ -50,12 +49,6 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
         print (linenumb, newstr)
         f2.write(newstr)
         f2.write("\n")
-        
-        
-#        os.chdir("/home/naturkach/gitart")
-#        os.system("git add .")
-#        os.system("git commit -m \"auto commit\"")
-
 
     for line in lines:
         line = line.strip()
@@ -73,17 +66,14 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
             linenumb += 1
             commit = "yes"
 			
-		#	print "line-",linenumb			
         elif "n" in line:
             poz = line.find("n")
             oldchar = "."
             oldline = line.replace('n', '.')
             linenumb += 2
-	    #rint linenumb
             commit = "no"
         elif ( linenumb == nexday+1 ):
             linenumb += 1
-#	    print "lnub = nextd", linenumb, nexday
    		
         else:	       
             print (linenumb, line)
@@ -96,6 +86,7 @@ if ( commit == "yes" ):
     os.system("mv pacman.tmp pacman")
     os.system("git add .")
     os.system("git commit -m \"auto commit\"")
+    os.system("git push")
 
 
 f1.close()
