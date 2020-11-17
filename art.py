@@ -11,6 +11,9 @@ import os
 
 pyday = datetime.datetime.today().weekday()
 print ("pyday:", pyday)
+print ("home", os.environ['HOME'])
+fpath = (os.environ['HOME'])+"/gitart/"
+print ("path:", fpath)
 
 if (pyday < 6):
 	daynow = pyday + 1
@@ -22,12 +25,12 @@ else:
 print ("daynow:", daynow)
 print ("nexday:", nexday)
 
-if os.path.exists("pacman.tmp"):
-    os.remove("pacman.tmp")
+if os.path.exists(fpath+"pacman.tmp"):
+    os.remove(fpath+"pacman.tmp")
 
 commit = "no"
 
-with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
+with open(fpath+"pacman", 'r') as f1, open(fpath+"pacman.tmp" , 'w') as f2:
     lines = f1.readlines()
     poz = 0 #deff value
     linenumb = 1	
@@ -82,7 +85,7 @@ with open('pacman', 'r') as f1, open('pacman.tmp' , 'w') as f2:
             linenumb += 1
 		
 if ( commit == "yes" ):
-    os.chdir("/home/naturkach/gitart")
+    os.chdir(fpath)
     os.system("mv pacman.tmp pacman")
     os.system("git add .")
     os.system("git commit -m \"auto commit\"")
