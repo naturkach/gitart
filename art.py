@@ -55,7 +55,7 @@ with open(fpath+"pacman", 'r') as f1, open(fpath+"pacman.tmp" , 'w') as f2:
 
     for line in lines:
         line = line.strip()
-        curr = line[daynow]		
+        #curr = line[daynow]		
 
         if "v" in line and daynow !=7:
             poz = line.find("v")				
