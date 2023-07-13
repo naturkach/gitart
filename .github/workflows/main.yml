@@ -1,5 +1,5 @@
 ---
-name: "Workflow example"
+name: "run py script"
 on:
   schedule:
     - cron: '* * * * *'
