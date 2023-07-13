@@ -91,6 +91,5 @@ if ( commit == "yes" ):
     os.system("git commit -m \"auto commit\"")
     os.system("git push")
 
-
 f1.close()
 f2.close()    
