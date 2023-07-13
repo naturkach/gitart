@@ -1,0 +1,27 @@
+---
+name: "Workflow example"
+on:
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  hello:
+    name: "Say hello"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display message
+        run: echo "Hello from GitHub Actions!"
+        
+      - name: clone repo
+        uses: actions/checkout@v3
+      
+      - name: ls
+        run : ls -la
+        
+      - name: pyversion
+        run : python --version
+        
+      - name: config git
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-username@users.noreply.github.com'
