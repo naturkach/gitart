@@ -1,9 +1,9 @@
 ---
 name: "run py script"
-# on:
-#   schedule:
-#     - cron: '* * * * *'
-on: workflow_dispatch
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+#on: workflow_dispatch
 
 jobs:
   hello:
